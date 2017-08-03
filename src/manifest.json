@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Github branch status",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "third_party/jquery-3.2.1.min.js",
+        "stored_item.js",
+        "store.js",
+        "badge.js",
+        "button-box.js",
+        "config.js",
+        "github.js",
+        "client.js"
+      ]
+    }
+  ]
+}
