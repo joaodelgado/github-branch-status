@@ -1,4 +1,4 @@
-class EnableButton {
+class ConfButtonBox {
 
     constructor(owner, repo) {
         this.store = new Store();
@@ -77,6 +77,6 @@ class EnableButton {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = ButtonBox;
+    module.exports = ConfButtonBox;
 }
 

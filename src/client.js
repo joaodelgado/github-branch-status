@@ -10,15 +10,15 @@ const listener = () => {
     console.debug("Owner: " + github.owner());
     console.debug("Repo: " + github.repo());
 
-    const enableButton = new EnableButton(github.owner(), github.repo());
+    const confButtons = new ConfButtonBox(github.owner(), github.repo());
 
-    enableButton.render();
-    if (enableButton.isEnabled()) {
-        const buttonBox = new ButtonBox({
+    confButtons.render();
+    if (confButtons.isEnabled()) {
+        const badgesBox = new BadgesBox({
             base: github.fileNavigator(),
             refs: store.getConfig(github.owner(), github.repo())
         });
-        buttonBox.render();
+        badgesBox.render();
     }
 }
 

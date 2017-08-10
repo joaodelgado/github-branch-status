@@ -1,4 +1,4 @@
-class ButtonBox {
+class BadgesBox {
 
     constructor({ refs, base }) {
         this.base = base;
@@ -26,5 +26,5 @@ class ButtonBox {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = ButtonBox;
+    module.exports = BadgesBox;
 }

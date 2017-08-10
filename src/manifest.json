@@ -13,8 +13,8 @@
         "stored_item.js",
         "store.js",
         "badge.js",
-        "button-box.js",
-        "enable-button.js",
+        "badges-box.js",
+        "conf-button-box.js",
         "config.js",
         "github.js",
         "client.js"
