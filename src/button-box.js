@@ -15,8 +15,9 @@ class ButtonBox {
         this.base.after(wrapper);
 
         for (const ref of this.refs) {
-            const branchWrapper = $(document.createElement('div'))
-                .attr('id', 'ghbs-wrapper-' + ref);
+            const branchWrapper = $(document.createElement('span'))
+                .attr('id', 'ghbs-wrapper-' + ref)
+                .css('margin-right', '4px');
             wrapper.append(branchWrapper);
             new Badge(ref, branchWrapper).render();
         }
