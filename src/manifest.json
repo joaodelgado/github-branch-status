@@ -9,10 +9,12 @@
       ],
       "js": [
         "third_party/jquery-3.2.1.min.js",
+        "third_party/arrive.min.js",
         "stored_item.js",
         "store.js",
         "badge.js",
         "button-box.js",
+        "enable-button.js",
         "config.js",
         "github.js",
         "client.js"

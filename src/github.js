@@ -31,8 +31,16 @@ class GitHub {
         }
     }
 
+    fileNavigator() {
+        return $('.file-navigation');
+    }
+
     inRepoHome() {
-        return !!this._repoHomePath();
+        return !!$(this.readmeSelector()).length
+    }
+
+    readmeSelector() {
+        return '#readme article';
     }
 
     _repoHomePath() {

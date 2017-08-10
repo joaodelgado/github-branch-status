@@ -11,6 +11,10 @@ class StoredItem {
             value = this._getInitial();
         }
 
+        if (value === undefined || value === null) {
+            return null;
+        }
+
         if (this.obfuscate) {
             value = atob(value);
         }
@@ -18,19 +22,27 @@ class StoredItem {
         return JSON.parse(value);
     }
 
-    _getInitial() {
-        var value = this.initial();
-
-        if (value === null) {
-            return value;
+    set(value) {
+        if (value !== undefined && value !== null) {
+            value = JSON.stringify(value);
+            if (this.obfuscate) {
+                value = btoa(value);
+            }
+        } else {
+            value = null;
         }
 
-        value = JSON.stringify(value);
-        if (this.obfuscate) {
-            value = btoa(value);
-        }
         window.localStorage.setItem(this.key, value);
         return value;
+    }
+
+    _getInitial() {
+        var value = this.initial;
+        if (typeof this.initial === 'function') {
+            value = this.initial();
+        }
+
+        return this.set(value);
     }
 
 }

@@ -5,10 +5,21 @@ class Store {
             initial: () => prompt("Github token"),
             obfuscate: true
         });
+        this.config = new StoredItem({
+            key: 'ghbs.config'
+        });
     }
 
-    getToken() {
-        return this.token.get();
+    getConfig(...paths) {
+        var base = this.config.get();
+        for (const path of paths) {
+            if (base === undefined || base === null) {
+                return;
+            }
+            base = base[path];
+        }
+
+        return base;
     }
 
 }

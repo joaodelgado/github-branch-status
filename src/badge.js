@@ -14,7 +14,7 @@ class Badge {
             type: 'GET',
             url: Config.GITHUB_API_BASE + 'repos/' + this.github.owner() + '/' + this.github.repo() + '/commits/' + this.ref + '/status',
             headers: {
-                "Authorization": "token " + this.store.getToken()
+                "Authorization": "token " + this.store.token.get()
             },
             error: () => {
                 this.status = 'error';
