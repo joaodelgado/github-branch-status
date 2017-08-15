@@ -1,5 +1,4 @@
 class ConfButtonBox {
-
     constructor(owner, repo) {
         this.store = new Store();
         this.owner = owner;
@@ -12,7 +11,6 @@ class ConfButtonBox {
     }
 
     render() {
-        console.debug("Rendering enable button");
         const base = $('.new-pull-request-btn');
 
         $('.ghbs-config-buttons-wrapper').remove();
@@ -38,12 +36,11 @@ class ConfButtonBox {
 
             wrapper.append(remove);
         }
-
     }
 
     addCheck() {
         const ref = prompt('What branch should be checked?');
-        var currentConfig = this.store.config.get();
+        let currentConfig = this.store.config.get();
 
         currentConfig = currentConfig || {};
         currentConfig[this.owner] = currentConfig[this.owner] || {};
@@ -63,8 +60,8 @@ class ConfButtonBox {
         }
         const ref = prompt('What branch should be removed?');
 
-        var currentConfig = this.store.config.get();
-        var index = currentConfig[this.owner][this.repo].indexOf(ref);
+        const currentConfig = this.store.config.get();
+        const index = currentConfig[this.owner][this.repo].indexOf(ref);
         if (index > -1) {
             currentConfig[this.owner][this.repo].splice(index, 1);
         }
@@ -73,10 +70,9 @@ class ConfButtonBox {
 
         window.location.reload();
     }
-
 }
 
-if (typeof module !== "undefined" && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = ConfButtonBox;
 }
 

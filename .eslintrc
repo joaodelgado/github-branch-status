@@ -1,0 +1,21 @@
+{
+    extends: "airbnb-base",
+    "env": {
+        "browser": true,
+        "jquery": true
+    },
+    globals: {
+        Badge: false,
+        Config: false,
+        GitHub: false,
+        Store: false,
+        StoredItem: false,
+        ConfButtonBox: false,
+        BadgesBox: false,
+    },
+    rules: {
+        "indent": ["error", 4],
+        "no-underscore-dangle": "off",
+        "class-methods-use-this": "off"
+    }
+}

@@ -6,7 +6,7 @@ class StoredItem {
     }
 
     get() {
-        var value = window.localStorage.getItem(this.key);
+        let value = window.localStorage.getItem(this.key);
         if (value === null) {
             value = this._getInitial();
         }
@@ -22,7 +22,8 @@ class StoredItem {
         return JSON.parse(value);
     }
 
-    set(value) {
+    set(param) {
+        let value = param;
         if (value !== undefined && value !== null) {
             value = JSON.stringify(value);
             if (this.obfuscate) {
@@ -37,16 +38,15 @@ class StoredItem {
     }
 
     _getInitial() {
-        var value = this.initial;
+        let value = this.initial;
         if (typeof this.initial === 'function') {
             value = this.initial();
         }
 
         return this.set(value);
     }
-
 }
 
-if (typeof module !== "undefined" && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = StoredItem;
 }

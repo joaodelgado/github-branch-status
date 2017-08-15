@@ -1,5 +1,4 @@
 class GitHub {
-
     constructor() {
         this.store = new Store();
     }
@@ -8,27 +7,24 @@ class GitHub {
         const match = this._repoHomePath();
         if (match) {
             return match[1];
-        } else {
-            return null;
         }
+        return null;
     }
 
     repo() {
         const match = this._repoHomePath();
         if (match) {
             return match[2];
-        } else {
-            return null;
         }
+        return null;
     }
 
     ref() {
         const match = this._repoHomePath();
         if (match) {
             return match[4];
-        } else {
-            return null;
         }
+        return null;
     }
 
     fileNavigator() {
@@ -36,7 +32,7 @@ class GitHub {
     }
 
     inRepoHome() {
-        return !!$(this.readmeSelector()).length
+        return !!$(this.readmeSelector()).length;
     }
 
     readmeSelector() {
@@ -48,6 +44,6 @@ class GitHub {
     }
 }
 
-if (typeof module !== "undefined" && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = GitHub;
 }

@@ -1,0 +1,17 @@
+{
+  "name": "github-branch-status",
+  "version": "0.0.1",
+  "description": "Chrome extension to show a branch status in the home repo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaodelgado/github-branch-status.git"
+  },
+  "author": "João Delgado",
+  "license": "IMT",
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}
