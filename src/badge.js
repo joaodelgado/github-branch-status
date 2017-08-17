@@ -1,18 +1,49 @@
-class Badge {
-    constructor(ref, base) {
+class Badge extends HTMLElement {
+    constructor(ref) {
+        super();
+
+        // Inner state attributes
         this.store = new Store();
         this.github = new GitHub();
-        this.ref = ref || 'development';
+        this.ref = ref || 'master';
         this.status = 'loading';
         this.url = undefined;
-        this.base = base;
+
+        // Elem attributes
+        this.id = `ghbs-wrapper-${this.ref}`;
+        this.style.marginRight = '4px';
+    }
+
+    static get observedAttributes() {
+        return ['ref'];
+    }
+
+    get ref() {
+        return this._ref;
+    }
+
+    set ref(v) {
+        this._ref = v;
+        this.updateStatus();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        // Since this only accepts ref for the attributes,
+        // there's no need to switch on the value of `name`
+        this.ref = newValue;
         this.getStatus();
     }
 
-    getStatus() {
+    connectedCallback() {
+        this.updateStatus();
+    }
+
+    updateStatus() {
+        this.status = 'loading';
+        this.render();
         $.ajax({
             type: 'GET',
-            url: `${Config.GITHUB_API_BASE}repos/${this.github.owner()}/${this.github.repo()}/commits/${this.ref}/status`,
+            url: `${Config.GITHUB_API_BASE}/repos/${this.github.owner()}/${this.github.repo()}/commits/${this.ref}/status`,
             headers: {
                 Authorization: `token ${this.store.token.get()}`,
             },
@@ -32,7 +63,7 @@ class Badge {
     }
 
     render() {
-        this.base.html(`
+        $(this).html(`
             <strong>${this.ref}</strong>
             <span class="commit-indicator">
                 <div class="commit-build-statuses">
@@ -82,6 +113,7 @@ class Badge {
     }
 }
 
+customElements.define('ghbs-badge', Badge);
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Badge;
 }

@@ -10,6 +10,7 @@
       "js": [
         "third_party/jquery-3.2.1.min.js",
         "third_party/arrive.min.js",
+        "third_party/webcomponents-sd-ce.min.js",
         "stored_item.js",
         "store.js",
         "badge.js",

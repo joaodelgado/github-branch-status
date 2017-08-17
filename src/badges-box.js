@@ -11,13 +11,7 @@ class BadgesBox {
             .css('margin-bottom', '10px');
         this.base.after(wrapper);
 
-        this.refs.forEach((ref) => {
-            const branchWrapper = $(document.createElement('span'))
-                .attr('id', `ghbs-wrapper-${ref}`)
-                .css('margin-right', '4px');
-            wrapper.append(branchWrapper);
-            new Badge(ref, branchWrapper).render();
-        });
+        this.refs.forEach(ref => wrapper.append(new Badge(ref)));
     }
 }
 
