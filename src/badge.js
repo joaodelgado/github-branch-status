@@ -20,7 +20,6 @@ class Badge {
                 this.status = 'error';
                 this.render();
             },
-            context: this,
             success: (data) => {
                 this.status = data.state;
                 if (data.statuses && data.statuses.length > 0) {
@@ -28,6 +27,7 @@ class Badge {
                 }
                 this.render();
             },
+            context: this,
         });
     }
 
@@ -44,6 +44,10 @@ class Badge {
 
     loading() {
         return '<span>Loading<span>';
+    }
+
+    error() {
+        return '<span>Error<span>';
     }
 
     success() {
