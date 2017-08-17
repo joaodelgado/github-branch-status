@@ -14,7 +14,7 @@ class Store {
         let base = this.config.get();
         paths.every((path) => {
             base = base[path];
-            return base === undefined || base === null;
+            return base !== undefined && base !== null;
         });
         return base;
     }
