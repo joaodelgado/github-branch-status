@@ -15,7 +15,7 @@ class ConfButtonBox {
 
         $('.ghbs-config-buttons-wrapper').remove();
         const wrapper = $(document.createElement('div'))
-            .attr('id', 'ghbs-config-wrapper');
+            .attr('id', 'ghbs-config-buttons-wrapper');
         base.after(wrapper);
 
         const add = $(document.createElement('button'))
