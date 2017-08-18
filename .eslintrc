@@ -7,12 +7,12 @@
     globals: {
         chrome: false,
         Badge: false,
+        BadgeBox: false,
         Config: false,
         GitHub: false,
         Store: false,
         StoredItem: false,
         ConfButtonBox: false,
-        BadgesBox: false,
     },
     rules: {
         "indent": ["error", 4],

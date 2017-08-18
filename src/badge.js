@@ -5,13 +5,17 @@ class Badge extends HTMLElement {
         // Inner state attributes
         this.store = new Store();
         this.github = new GitHub();
-        this.ref = ref || 'master';
+        this._ref = ref || 'master';
         this.status = 'loading';
         this.url = undefined;
 
         // Elem attributes
-        this.id = `ghbs-wrapper-${this.ref}`;
+        this.id = `ghbs-badge-${this.ref}`;
         this.style.marginRight = '4px';
+    }
+
+    static get is() {
+        return 'ghbs-badge';
     }
 
     static get observedAttributes() {
@@ -24,21 +28,20 @@ class Badge extends HTMLElement {
 
     set ref(v) {
         this._ref = v;
-        this.updateStatus();
+        this.update();
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         // Since this only accepts ref for the attributes,
         // there's no need to switch on the value of `name`
         this.ref = newValue;
-        this.getStatus();
     }
 
     connectedCallback() {
-        this.updateStatus();
+        this.update();
     }
 
-    updateStatus() {
+    update() {
         this.status = 'loading';
         this.render();
         $.ajax({
@@ -63,14 +66,14 @@ class Badge extends HTMLElement {
     }
 
     render() {
-        $(this).html(`
+        this.innerHTML = `
             <strong>${this.ref}</strong>
             <span class="commit-indicator">
                 <div class="commit-build-statuses">
                     ${this[this.status]()}
                 </div>
             </span>
-        `);
+        `;
     }
 
     loading() {
@@ -113,7 +116,7 @@ class Badge extends HTMLElement {
     }
 }
 
-customElements.define('ghbs-badge', Badge);
+customElements.define(Badge.is, Badge);
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Badge;
 }

@@ -10,11 +10,8 @@ const listener = () => {
 
     confButtons.render();
     if (confButtons.isEnabled()) {
-        const badgesBox = new BadgesBox({
-            base: github.fileNavigator(),
-            refs: store.getConfig(github.owner(), github.repo()),
-        });
-        badgesBox.render();
+        const badgeBox = new BadgeBox(store.getConfig(github.owner(), github.repo()));
+        github.fileNavigator().after(badgeBox);
     }
 };
 
