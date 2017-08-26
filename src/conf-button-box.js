@@ -34,12 +34,16 @@ class ConfButtonBox {
                 .text('Remove check')
                 .click(() => this.removeCheck());
 
+            // wrapper.append(new TokenInput());
             wrapper.append(remove);
         }
     }
 
     addCheck() {
         const ref = prompt('What branch should be checked?');
+        if (!ref) {
+            return;
+        }
         let currentConfig = this.store.config.get();
 
         currentConfig = currentConfig || {};
@@ -59,6 +63,9 @@ class ConfButtonBox {
             return;
         }
         const ref = prompt('What branch should be removed?');
+        if (!ref) {
+            return;
+        }
 
         const currentConfig = this.store.config.get();
         const index = currentConfig[this.owner][this.repo].indexOf(ref);
