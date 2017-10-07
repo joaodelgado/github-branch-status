@@ -7,8 +7,10 @@
     </span>
 
     <div class="select-menu-modal-holder dropdown-menu-content"
-         :style="{ display: open ? 'block' : 'none' }">
+         style="display: block"
+         v-if="open">
         <div class="dropdown-menu dropdown-menu-se"
+            style="top: 6px"
             :style="{ width: width + 'px' }">
             <slot></slot>
         </div>
