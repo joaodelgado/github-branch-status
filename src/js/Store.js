@@ -1,16 +1,11 @@
 class StoredItem {
-    constructor({ key, initial, obfuscate = false }) {
+    constructor({ key, obfuscate = false }) {
         this.key = key;
-        this.initial = initial;
         this.obfuscate = obfuscate;
     }
 
     get() {
         let value = window.localStorage.getItem(this.key);
-        if (value === null) {
-            value = this._getInitial();
-        }
-
         if (value === undefined || value === null) {
             return null;
         }
@@ -36,17 +31,16 @@ class StoredItem {
         window.localStorage.setItem(this.key, value);
         return value;
     }
+}
 
-    _getInitial() {
-        let value = this.initial;
-        if (typeof this.initial === 'function') {
-            value = this.initial();
-        }
-
-        return this.set(value);
+class Store {
+    constructor() {
+        this.token = new StoredItem({
+            key: 'ghbs.token',
+            obfuscate: true,
+        });
     }
 }
 
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = StoredItem;
-}
+export default Store;
+

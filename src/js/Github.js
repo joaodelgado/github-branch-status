@@ -1,8 +1,4 @@
 class GitHub {
-    constructor() {
-        this.store = new Store();
-    }
-
     owner() {
         const match = this._repoHomePath();
         if (match) {
@@ -27,12 +23,8 @@ class GitHub {
         return null;
     }
 
-    fileNavigator() {
-        return $('.file-navigation');
-    }
-
     inRepoHome() {
-        return !!$(this.readmeSelector()).length;
+        return !!document.querySelector(this.readmeSelector());
     }
 
     readmeSelector() {
@@ -47,3 +39,4 @@ class GitHub {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = GitHub;
 }
+
