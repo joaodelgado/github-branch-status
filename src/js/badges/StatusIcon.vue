@@ -45,6 +45,7 @@
 import Vue from 'vue';
 
 import '../icons/Check.vue';
+import '../icons/Circle.vue';
 import '../icons/Cross.vue';
 
 export default Vue.component('status-icon', {
