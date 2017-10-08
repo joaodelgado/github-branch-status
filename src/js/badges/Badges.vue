@@ -1,4 +1,4 @@
-<template>
+<template v-if="tokenPassedValidation && hasValidToken">
 
 <div class="mb-2">
     <badge v-for="check in checks" :key="check" :branch="check"></badge>
@@ -23,6 +23,12 @@ export default Vue.component('badges', {
                 this.github.repo()
             ) || [];
         },
+    },
+
+    data() {
+        return {
+            hasValidToken: false,
+        };
     },
 
 });

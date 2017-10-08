@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { hasValue } from './Utils';
+
 const GITHUB_API_BASE = 'https://api.github.com';
 
 export default class GitHub {
@@ -28,13 +30,35 @@ export default class GitHub {
     }
 
     fetchStatus(token, branch) {
-        return axios.get(
-            `${GITHUB_API_BASE}/repos/${this.owner()}/${this.repo()}/commits/${branch}/status`,
-            {
+        let config;
+
+        if (hasValue(token)) {
+            config = {
                 headers: {
                     Authorization: `token ${token}`,
                 },
-            }
+            };
+        }
+
+        return axios.get(
+            `${GITHUB_API_BASE}/repos/${this.owner()}/${this.repo()}/commits/${branch}/status`,
+            config
+        );
+    }
+
+    checkAuthorization(token) {
+        let config;
+
+        if (hasValue(token)) {
+            config = {
+                headers: {
+                    Authorization: `token ${token}`,
+                },
+            };
+        }
+        return axios.get(
+            `${GITHUB_API_BASE}/repos/${this.owner()}/${this.repo()}`,
+            config
         );
     }
 

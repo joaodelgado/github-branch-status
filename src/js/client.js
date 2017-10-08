@@ -2,6 +2,7 @@
 
 import 'arrive';
 import Vue from 'vue';
+import AsyncComputed from 'vue-async-computed';
 
 import Github from './Github';
 
@@ -13,6 +14,7 @@ const github = new Github();
 
 import Store from './Store';
 
+Vue.use(AsyncComputed);
 Vue.use(Store);
 Vue.mixin({
     data() {
@@ -57,6 +59,7 @@ function initButtons() {
         el: `#${CONF_BUTTONS_ID}`,
         render: c => c(ConfButtons),
     });
+
     new Vue({
         el: `#${BADGES_ID}`,
         render: c => c(Badges),
