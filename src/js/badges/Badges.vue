@@ -1,40 +1,30 @@
 <template>
 
-    <span>
-        <token-button v-if="!this.store.token"></token-button>
-        <add-badge-button v-if="this.store.token"></add-badge-button>
-        <remove-badge-button v-if="hasChecks"></remove-badge-button>
-    </span>
+<div class="mb-2">
+    <badge v-for="check in checks" :key="check" :branch="check"></badge>
+</div>
 
 </template>
 
 <script>
+
 import Vue from 'vue';
 
-import './TokenButton.vue';
-import './AddBadgeButton.vue';
-import './RemoveBadgeButton.vue';
+import './Badge.vue';
+import { getNested } from '../Utils';
 
-export default Vue.component('conf-buttons', {
+export default Vue.component('badges', {
 
     computed: {
         checks() {
-            const { config } = this.store;
-            const owner = this.github.owner();
-            const repo = this.github.repo();
-
-            if(!config
-                || !config[owner]
-                || !config[owner][repo]) {
-                return [];
-            }
-
-            return config[owner][repo] || [];
+            return getNested(
+                this.store.config,
+                this.github.owner(),
+                this.github.repo()
+            ) || [];
         },
     },
 
 });
 
 </script>
-
-

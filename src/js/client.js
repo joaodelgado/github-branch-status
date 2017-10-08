@@ -23,10 +23,12 @@ Vue.mixin({
 });
 
 import ConfButtons from './buttons/Buttons.vue';
+import Badges from './badges/Badges.vue';
 import { EventBus } from './EventBus';
 
 
 const CONF_BUTTONS_ID = 'ghbs-conf-buttons';
+const BADGES_ID = 'ghbs-badges';
 
 function reset() {
     EventBus.$off();
@@ -38,16 +40,26 @@ function reset() {
 }
 
 function initButtons() {
-    const base = document.querySelector('.new-pull-request-btn');
-    const wrapper = document.createElement('div');
+    const buttonsBase = document.querySelector('.new-pull-request-btn');
+    const badgesBase = document.querySelector('.file-navigation');
 
-    wrapper.id = CONF_BUTTONS_ID;
-    base.after(wrapper);
+    const buttonsWrapper = document.createElement('div');
+    buttonsWrapper.id = CONF_BUTTONS_ID;
+
+    const badgesWrapper = document.createElement('div');
+    badgesWrapper.id = BADGES_ID;
+
+    buttonsBase.after(buttonsWrapper);
+    badgesBase.after(badgesWrapper);
 
     /* eslint-disable no-new */
     new Vue({
         el: `#${CONF_BUTTONS_ID}`,
         render: c => c(ConfButtons),
+    });
+    new Vue({
+        el: `#${BADGES_ID}`,
+        render: c => c(Badges),
     });
     /* eslint-enable no-new */
 }
