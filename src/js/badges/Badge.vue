@@ -1,6 +1,7 @@
 <template>
 <span class="mr-3">
 
+
 <strong>{{ branch }}</strong>
 <status-icon :status="status" :url="url"></status-icon>
 

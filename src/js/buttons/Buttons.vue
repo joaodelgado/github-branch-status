@@ -1,7 +1,7 @@
 <template>
 
     <span>
-        <token-button v-if="!this.store.token"></token-button>
+        <token-button v-if="true || !this.store.token"></token-button>
         <add-badge-button v-if="this.store.token"></add-badge-button>
         <remove-badge-button v-if="hasChecks"></remove-badge-button>
     </span>
