@@ -25,16 +25,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 import '../tooltip/Tooltip.vue';
 
-import Store from '../Store';
 import { EventBus, GlobalEvents } from '../EventBus';
 
-export default {
-
-    created() {
-        this.store = new Store();
-    },
+export default Vue.component('token-button', {
 
     data() {
         return {
@@ -44,11 +41,13 @@ export default {
 
     methods: {
         submit() {
-            this.store.token.set(this.token);
+            this.store.token = this.token;
+
             EventBus.$emit(GlobalEvents.CLOSE_TOOLTIP);
+            this.$emit('token-submitted');
         },
     },
 
-};
+});
 
 </script>
