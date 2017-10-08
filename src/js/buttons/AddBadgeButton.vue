@@ -29,6 +29,8 @@ import Vue from 'vue';
 
 import '../tooltip/Tooltip.vue';
 import { EventBus, GlobalEvents } from '../EventBus';
+import { getNested, setNested } from '../Utils';
+
 
 export default Vue.component('add-badge-button', {
     data() {
@@ -45,17 +47,21 @@ export default Vue.component('add-badge-button', {
                 return;
             }
 
-            const config = this.store.config || {};
-            const owner = this.github.owner();
-            const repo = this.github.repo();
+            const currentChecks = getNested(
+                this.store.config,
+                this.github.owner(),
+                this.github.repo()
+            ) || [];
 
-            config[owner] = config[owner] || {};
-            config[owner][repo] = config[owner][repo] || [];
-
-            if (config[owner][repo].indexOf(this.branch) === -1) {
-                config[owner][repo].push(this.branch);
-                this.store.config = config;
+            if (currentChecks.indexOf(this.branch) === -1) {
+                currentChecks.push(this.branch);
             }
+            setNested(
+                this.store.config,
+                this.github.owner(),
+                this.github.repo(),
+                currentChecks
+            );
 
             // Clear submitted branch
             this.branch = undefined;

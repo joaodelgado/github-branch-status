@@ -1,7 +1,9 @@
-function getFromStorage(key, obfuscate) {
+import { hasValue } from './Utils';
+
+function getFromStorage(key, obfuscate, initial = null) {
     let value = window.localStorage.getItem(key);
-    if (value === undefined || value === null) {
-        return null;
+    if (!hasValue(value)) {
+        return initial;
     }
 
     if (obfuscate) {
@@ -33,7 +35,7 @@ export default {
         const data = {
             store: {
                 token: getFromStorage('ghbs.token', true),
-                config: getFromStorage('ghbs.config', false),
+                config: getFromStorage('ghbs.config', false, {}),
             },
         };
 
