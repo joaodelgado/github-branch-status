@@ -1,23 +1,30 @@
-import 'arrive';
-
-import Vue from 'vue';
-
 /* eslint-disable import/first */
 
-// This must be imported before creating any component
+import 'arrive';
+import Vue from 'vue';
+
+import Github from './Github';
+
+const github = new Github();
+
+//
+// Configure global Vue mixins and plugins
+//
+
 import Store from './Store';
 
 Vue.use(Store);
+Vue.mixin({
+    data() {
+        return {
+            github,
+        };
+    },
+});
 
-import GitHub from './Github';
 import ConfButtons from './buttons/Buttons.vue';
-
 import { EventBus } from './EventBus';
 
-/* eslint-enable import/first */
-
-
-const github = new GitHub();
 
 const CONF_BUTTONS_ID = 'ghbs-conf-buttons';
 

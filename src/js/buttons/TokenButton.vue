@@ -28,7 +28,6 @@
 import Vue from 'vue';
 
 import '../tooltip/Tooltip.vue';
-
 import { EventBus, GlobalEvents } from '../EventBus';
 
 export default Vue.component('token-button', {
@@ -42,6 +41,7 @@ export default Vue.component('token-button', {
     methods: {
         submit() {
             this.store.token = this.token;
+            this.token = undefined;
 
             EventBus.$emit(GlobalEvents.CLOSE_TOOLTIP);
             this.$emit('token-submitted');

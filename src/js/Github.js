@@ -1,4 +1,4 @@
-class GitHub {
+export default class GitHub {
     owner() {
         const match = this._repoHomePath();
         if (match) {
@@ -32,11 +32,7 @@ class GitHub {
     }
 
     _repoHomePath() {
-        return window.location.pathname.match(/^\/([\w-]+)\/([\w-]+)(\/tree\/([\w-]+))?\/?$/);
+        return window.location.pathname.match(/^\/([\w-.]+)\/([\w-.]+)(\/tree\/([\w-.]+))?\/?$/);
     }
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = GitHub;
 }
 

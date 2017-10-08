@@ -30,22 +30,27 @@ function generateSetter(key, obfuscate) {
 
 export default {
     install(Vue) {
-        const state = {
+        const data = {
             store: {
-                token: getFromStorage('ghbs.token', false),
+                token: getFromStorage('ghbs.token', true),
+                config: getFromStorage('ghbs.config', false),
             },
         };
 
         const watchers = {
             'store.token': {
                 deep: true,
-                handler: generateSetter('ghbs.token', false),
+                handler: generateSetter('ghbs.token', true),
+            },
+            'store.config': {
+                deep: true,
+                handler: generateSetter('ghbs.config', false),
             },
         };
 
         Vue.mixin({
             data() {
-                return state;
+                return data;
             },
             watch: watchers,
         });

@@ -2,11 +2,11 @@
 
 <tooltip :width="300">
     <button slot="clickable" class="btn btn-sm ml-2">
-        <span>Add check</span>
+        <span>Remove check</span>
     </button>
 
     <div class="m-2">
-        <span>Please insert the branch you want to check:</span>
+        <span>Please insert the branch you want to remove:</span>
         <div class="input-group">
             <input type="text"
                 class="form-control input-monospace input-sm"
@@ -14,7 +14,7 @@
                 @keyup.enter="submit">
             </input>
             <div class="input-group-button">
-                <button class="btn btn-sm btn-primary" @click="submit">
+                <button class="btn btn-sm btn-danger" @click="submit">
                     <span>Submit</span>
                 </button>
             </div>
@@ -30,7 +30,7 @@ import Vue from 'vue';
 import '../tooltip/Tooltip.vue';
 import { EventBus, GlobalEvents } from '../EventBus';
 
-export default Vue.component('add-badge-button', {
+export default Vue.component('remove-badge-button', {
     data() {
         return {
             branch: undefined,
@@ -49,11 +49,13 @@ export default Vue.component('add-badge-button', {
             const owner = this.github.owner();
             const repo = this.github.repo();
 
-            config[owner] = config[owner] || {};
-            config[owner][repo] = config[owner][repo] || [];
+            if (!config[owner] || !config[owner][repo]) {
+                return;
+            }
 
-            if (config[owner][repo].indexOf(this.branch) === -1) {
-                config[owner][repo].push(this.branch);
+            const index = config[owner][repo].indexOf(this.branch);
+            if (index > -1) {
+                config[owner][repo].splice(index, 1);
                 this.store.config = config;
             }
 
