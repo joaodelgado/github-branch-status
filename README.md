@@ -10,6 +10,10 @@ It then uses the GitHub API to check the status of each branch.
 
 To use on private repositories it is necessary to provide a [personal access token](https://github.com/settings/tokens)
 
+## How to install
+
+Drag and drop `dist/chrome.crx` into `chrome://extensions/`.
+
 ## Development
 
 This project uses [yarn](https://yarnpkg.com/en/) to manage dependencies and [Webpack](https://webpack.github.io/) to build the extension.
