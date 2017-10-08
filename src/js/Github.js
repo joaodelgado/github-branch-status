@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+const GITHUB_API_BASE = 'https://api.github.com';
+
 export default class GitHub {
     owner() {
         const match = this._repoHomePath();
@@ -21,6 +25,17 @@ export default class GitHub {
             return match[4];
         }
         return null;
+    }
+
+    fetchStatus(token, branch) {
+        return axios.get(
+            `${GITHUB_API_BASE}/repos/${this.owner()}/${this.repo()}/commits/${branch}/status`,
+            {
+                headers: {
+                    Authorization: `token ${token}`,
+                },
+            }
+        );
     }
 
     inRepoHome() {

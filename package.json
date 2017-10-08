@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "arrive": "^2.4.1",
-    "request": "^2.83.0",
+    "axios": "^0.16.2",
     "vue": "^2.4.4"
   }
 }

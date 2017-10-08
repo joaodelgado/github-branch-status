@@ -3,9 +3,10 @@
 <span class="commit-indicator">
     <div class="commit-build-statuses">
 
-        <span v-if="status === 'success'">
+        <template v-if="status === 'success'">
             <a class="text-green tooltipped tooltipped-s"
-                aria-label="Success: This commit looks good">
+                aria-label="Success: This commit looks good"
+                :href="url">
                 <svg class="octicon octicon-check"
                     height="16" width="12"
                     version="1.1" viewBox="0 0 12 16">
@@ -14,11 +15,12 @@
                     </path>
                 </svg>
             </a>
-        </span>
+        </template>
 
-        <span v-if="status === 'pending'">
+        <template v-else-if="status === 'pending'">
             <a class="bg-pending tooltipped tooltipped-s"
-                aria-label="Pending: This commit is being built">
+                aria-label="Pending: This commit is being built"
+                :href="url">
                 <svg class="octicon octicon-primitive-dot"
                     height="16" width="8"
                     version="1.1" viewBox="0 0 8 16">
@@ -27,11 +29,12 @@
                     </path>
                 </svg>
             </a>
-        </span>
+        </template>
 
-        <span v-if="status === 'failure'">
+        <template v-else-if="status === 'failure'">
             <a class="text-red tooltipped tooltipped-s"
-                aria-label="Failure: This commit cannot be built">
+                aria-label="Failure: This commit cannot be built"
+                :href="url">
                 <svg class="octicon octicon-x"
                     height="16" width="12"
                     version="1.1" viewBox="0 0 12 16">
@@ -42,15 +45,15 @@
                     </path>
                 </svg>
             </a>
-        </span>
+        </template>
 
-        <span v-else-if="status === 'loading'">
+        <template v-else-if="status === 'loading'">
             Loading
-        </span>
+        </template>
 
-        <span v-else>
-            Error
-        </span>
+        <template v-else>
+            <strong class="ghbs-error">Error</strong>
+        </template>
 
     </div>
 </span>
@@ -65,8 +68,17 @@ export default Vue.component('status-icon', {
 
     props: {
         status: String,
+        url: String,
     },
 
 });
 
 </script>
+
+<style>
+
+.ghbs-error {
+    color: #cb2431;
+}
+
+</style>
