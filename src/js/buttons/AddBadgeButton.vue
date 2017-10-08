@@ -1,6 +1,6 @@
 <template>
 
-<tooltip :width="300">
+<tooltip @tooltip-open="focus" :width="300">
     <button slot="clickable" class="btn btn-sm ml-2">
         <span>Add check</span>
     </button>
@@ -10,6 +10,7 @@
         <div class="input-group">
             <input type="text"
                 class="form-control input-monospace input-sm"
+                ref="input"
                 v-model="branch"
                 @keyup.enter="submit">
             </input>
@@ -40,6 +41,10 @@ export default Vue.component('add-badge-button', {
     },
 
     methods: {
+        focus() {
+            Vue.nextTick(() => this.$refs.input.focus());
+        },
+
         submit() {
             EventBus.$emit(GlobalEvents.CLOSE_TOOLTIP);
 

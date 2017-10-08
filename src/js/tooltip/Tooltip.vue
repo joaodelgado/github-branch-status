@@ -2,13 +2,13 @@
 
 <div class="float-left">
 
-    <span @click="open = true">
+    <span @click="open">
         <slot name="clickable"></slot>
     </span>
 
     <div class="select-menu-modal-holder dropdown-menu-content"
          style="display: block"
-         v-if="open">
+         v-if="isOpen">
         <div class="dropdown-menu dropdown-menu-se"
             style="top: 6px"
             :style="{ width: width + 'px' }">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="ghbs-backdrop" v-if="open" @click="open = false"></div>
+    <div class="ghbs-backdrop" v-if="isOpen" @click="close"></div>
 
 </div>
 
@@ -38,13 +38,20 @@ export default Vue.component('tooltip', {
 
     data() {
         return {
-            open: false,
+            isOpen: false,
         };
     },
 
     methods: {
+
+        open() {
+            this.isOpen = true;
+            this.$emit('tooltip-open');
+        },
+
         close() {
-            this.open = false;
+            this.isOpen = false;
+            this.$emit('tooltip-closed');
         },
     },
 

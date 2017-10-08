@@ -52,7 +52,7 @@
         </template>
 
         <template v-else>
-            <strong class="ghbs-error">Error</strong>
+            <strong class="text-red">Error</strong>
         </template>
 
     </div>
@@ -74,11 +74,3 @@ export default Vue.component('status-icon', {
 });
 
 </script>
-
-<style>
-
-.ghbs-error {
-    color: #cb2431;
-}
-
-</style>

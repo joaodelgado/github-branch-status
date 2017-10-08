@@ -1,6 +1,6 @@
 <template>
 
-<tooltip :width="300">
+<tooltip @tooltip-open="focus" :width="300">
     <button slot="clickable"
         class="btn btn-sm ml-2 tooltipped tooltipped-s"
         aria-label="Configure Github Branch Status">
@@ -25,6 +25,7 @@ M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.
         <div class="input-group">
             <input type="text"
                 class="form-control input-monospace input-sm"
+                ref="input"
                 v-model="token"
                 @keyup.enter="submit">
             </input>
@@ -54,6 +55,10 @@ export default Vue.component('token-button', {
     },
 
     methods: {
+        focus() {
+            Vue.nextTick(() => this.$refs.input.focus());
+        },
+
         submit() {
             this.store.token = this.token;
             this.token = undefined;
