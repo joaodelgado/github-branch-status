@@ -23,10 +23,14 @@ export default class GitHub {
 
     ref() {
         const match = this._repoHomePath();
-        if (match) {
+        if (match && match[4]) {
             return match[4];
         }
-        return null;
+
+        // If we can't find the current branch from the path
+        // Try to inspect the page to get it.
+        const branchSelector = document.querySelector('.branch-select-menu .select-menu-item.selected');
+        return branchSelector.attributes['data-name'].value;
     }
 
     fetchStatus(token, branch) {
@@ -47,19 +51,7 @@ export default class GitHub {
     }
 
     checkAuthorization(token) {
-        let config;
-
-        if (hasValue(token)) {
-            config = {
-                headers: {
-                    Authorization: `token ${token}`,
-                },
-            };
-        }
-        return axios.get(
-            `${GITHUB_API_BASE}/repos/${this.owner()}/${this.repo()}`,
-            config
-        );
+        return this.fetchStatus(token, this.ref());
     }
 
     inRepoHome() {
@@ -74,4 +66,3 @@ export default class GitHub {
         return window.location.pathname.match(/^\/([\w-.]+)\/([\w-.]+)(\/tree\/([\w-.]+))?\/?$/);
     }
 }
-
