@@ -29,9 +29,24 @@ export default Vue.component('badge', {
 
     data() {
         return {
-            status: 'loading',
             url: undefined,
         };
+    },
+
+    asyncComputed: {
+        status: {
+            get() {
+                return this.github.fetchStatus(this.store.token, this.branch)
+                    .then((response) => {
+                        if (response.data.statuses && response.data.statuses.length > 0) {
+                            this.url = response.data.statuses[0].target_url;
+                        }
+                        return response.data.state;
+                    })
+                    .catch(() => 'error');
+            },
+            default: 'loading',
+        },
     },
 
     methods: {
@@ -43,24 +58,6 @@ export default Vue.component('badge', {
                 this.store.config[owner][repo].splice(index, 1);
             }
         },
-
-        fetchStatus() {
-            this.status = 'loading';
-            this.github.fetchStatus(this.store.token, this.branch)
-                .then((response) => {
-                    this.status = response.data.state;
-                    if (response.data.statuses && response.data.statuses.length > 0) {
-                        this.url = response.data.statuses[0].target_url;
-                    }
-                })
-                .catch(() => {
-                    this.status = 'error';
-                });
-        },
-    },
-
-    mounted() {
-        this.fetchStatus();
     },
 
 });
