@@ -29,34 +29,30 @@ import Badges from './badges/Badges.vue';
 import { EventBus } from './EventBus';
 
 
-const CONF_BUTTONS_ID = 'ghbs-conf-buttons';
+const BUTTONS_ID = 'ghbs-conf-buttons';
 const BADGES_ID = 'ghbs-badges';
 
-function reset() {
+function init() {
     EventBus.$off();
 
-    const existingButtons = document.getElementById(CONF_BUTTONS_ID);
-    if (existingButtons) {
-        existingButtons.remove();
+    // Create base elements
+    if (!document.getElementById(BUTTONS_ID)) {
+        const buttonsBase = document.querySelector('.new-pull-request-btn');
+        const buttonsWrapper = document.createElement('div');
+        buttonsWrapper.id = BUTTONS_ID;
+        buttonsBase.after(buttonsWrapper);
     }
-}
 
-function initButtons() {
-    const buttonsBase = document.querySelector('.new-pull-request-btn');
-    const badgesBase = document.querySelector('.file-navigation');
-
-    const buttonsWrapper = document.createElement('div');
-    buttonsWrapper.id = CONF_BUTTONS_ID;
-
-    const badgesWrapper = document.createElement('div');
-    badgesWrapper.id = BADGES_ID;
-
-    buttonsBase.after(buttonsWrapper);
-    badgesBase.after(badgesWrapper);
+    if (!document.getElementById(BADGES_ID)) {
+        const badgesBase = document.querySelector('.file-navigation');
+        const badgesWrapper = document.createElement('div');
+        badgesWrapper.id = BADGES_ID;
+        badgesBase.after(badgesWrapper);
+    }
 
     /* eslint-disable no-new */
     new Vue({
-        el: `#${CONF_BUTTONS_ID}`,
+        el: `#${BUTTONS_ID}`,
         render: c => c(ConfButtons),
     });
 
@@ -72,8 +68,7 @@ const listener = () => {
         return;
     }
 
-    reset();
-    initButtons();
+    init();
 };
 
 document.arrive(github.readmeSelector(), listener);
