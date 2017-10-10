@@ -1,6 +1,6 @@
 {
-  "name": "github-branch-status",
-  "version": "0.1.0",
+  "name": "Github Branch Status",
+  "version": "0.1.1",
   "description": "Chrome extension to show a branch status in the home repo",
   "repository": {
     "type": "git",
