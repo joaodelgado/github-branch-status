@@ -37,14 +37,14 @@ function init() {
 
     // Create base elements
     if (!document.getElementById(BUTTONS_ID)) {
-        const buttonsBase = document.querySelector('.new-pull-request-btn');
+        const buttonsBase = document.querySelector(github.pullRequestButtonSelector());
         const buttonsWrapper = document.createElement('div');
         buttonsWrapper.id = BUTTONS_ID;
         buttonsBase.after(buttonsWrapper);
     }
 
     if (!document.getElementById(BADGES_ID)) {
-        const badgesBase = document.querySelector('.file-navigation');
+        const badgesBase = document.querySelector(github.fileNavigatorSelector());
         const badgesWrapper = document.createElement('div');
         badgesWrapper.id = BADGES_ID;
         badgesBase.after(badgesWrapper);
@@ -71,5 +71,5 @@ const listener = () => {
     init();
 };
 
-document.arrive(github.readmeSelector(), listener);
+document.arrive(github.pullRequestButtonSelector(), listener);
 listener();

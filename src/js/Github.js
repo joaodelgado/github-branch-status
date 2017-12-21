@@ -55,11 +55,15 @@ export default class GitHub {
     }
 
     inRepoHome() {
-        return !!document.querySelector(this.readmeSelector());
+        return !!document.querySelector(this.pullRequestButtonSelector());
     }
 
-    readmeSelector() {
-        return '#readme article';
+    pullRequestButtonSelector() {
+        return '.new-pull-request-btn';
+    }
+
+    fileNavigatorSelector() {
+        return '.file-navigation';
     }
 
     _repoHomePath() {
